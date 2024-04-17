@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_application/view/homescreen/widgets/search_view.dart';
+import 'package:gallery_application/viewmodel/image_view_model.dart';
+import 'package:get/get.dart';
 import 'widgets/homescreen_appbar.dart';
 import 'widgets/image_grid.dart';
 
@@ -7,12 +10,31 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PreferredSize(
+    final TextEditingController searchController = TextEditingController();
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: HomescreenAppBar(),
       ),
-      body: ImageGrid(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.02, vertical: height * 0.02),
+        child: Column(
+          children: [
+            SearchTextField(
+              controller: searchController,
+              onChanged: (query) {
+                Get.find<ImageViewModel>().fetchData(searchData: query);
+              },
+            ),
+            Expanded(
+              child: ImageGrid(searchController: searchController),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

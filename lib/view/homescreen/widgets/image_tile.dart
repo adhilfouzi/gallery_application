@@ -9,9 +9,12 @@ class ImageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Get.to(FullScreenImage(imageData: imageData));
+        Get.to(FullScreenImage(imageData: imageData),
+            duration: const Duration(milliseconds: 10));
       },
       child: Card(
         elevation: 2,
@@ -44,7 +47,8 @@ class ImageTile extends StatelessWidget {
                     colors: [Colors.black87, Colors.transparent],
                   ),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0, vertical: height * 0.02),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,7 +57,7 @@ class ImageTile extends StatelessWidget {
                       color: Colors.white,
                       size: 16,
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: width * 0.002),
                     Text(
                       '${imageData['likes']}',
                       style: const TextStyle(
@@ -62,13 +66,13 @@ class ImageTile extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: width * 0.05),
                     const Icon(
                       Icons.remove_red_eye,
                       color: Colors.white,
                       size: 16,
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: width * 0.002),
                     Text(
                       '${imageData['views']}',
                       style: const TextStyle(

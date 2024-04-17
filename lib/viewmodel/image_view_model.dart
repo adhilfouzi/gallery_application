@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:gallery_application/model/repository/image_repository.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class ImageViewModel extends GetxController {
-  var images = <Map<String, dynamic>>[].obs;
+  var allImages = <Map<String, dynamic>>[].obs;
+  var filteredImages = <Map<String, dynamic>>[].obs;
   var isLoading = true.obs;
+  var errorMessage = ''.obs;
 
   @override
   void onInit() {
@@ -14,9 +17,12 @@ class ImageViewModel extends GetxController {
     fetchData();
   }
 
-  void fetchData() async {
+  void fetchData({String? searchData}) async {
     try {
-      var response = await ImageRepository.getData();
+      isLoading(true);
+      final response = searchData != null
+          ? await ImageRepository.searchData(searchData)
+          : await ImageRepository.getData();
       handleResponse(response);
     } catch (e) {
       handleError(e.toString());
@@ -24,11 +30,14 @@ class ImageViewModel extends GetxController {
   }
 
   void handleResponse(http.Response response) {
+    log("statusCode :${response.statusCode}");
     if (response.statusCode == 200) {
-      var decodedResponse = jsonDecode(response.body);
+      final decodedResponse = jsonDecode(response.body);
       if (decodedResponse['hits'] != null) {
-        images.assignAll(
+        allImages.assignAll(
             List<Map<String, dynamic>>.from(decodedResponse['hits']));
+        filteredImages.assignAll(allImages);
+        errorMessage('');
       } else {
         handleError('No image data found');
       }
@@ -41,5 +50,23 @@ class ImageViewModel extends GetxController {
   void handleError(String errorMessage) {
     log('Error: $errorMessage');
     isLoading(false);
+    this.errorMessage(errorMessage);
+  }
+
+  void filterImages(String query) {
+    if (query.isEmpty) {
+      filteredImages.assignAll(allImages);
+      return;
+    }
+
+    final filtered = allImages.where((image) =>
+        image['user'].toString().toLowerCase().contains(query.toLowerCase()));
+    filteredImages.assignAll(filtered.toList());
+
+    if (filteredImages.isEmpty) {
+      errorMessage('No images found for "$query"');
+    } else {
+      errorMessage('');
+    }
   }
 }

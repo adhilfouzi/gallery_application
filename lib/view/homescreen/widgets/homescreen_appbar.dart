@@ -9,6 +9,16 @@ class HomescreenAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    double fontSize = 10;
+    if (width < 360) {
+      fontSize = 10;
+    } else if (width < 600) {
+      fontSize = 20;
+    } else if (width < 1024) {
+      fontSize = 25;
+    } else {
+      fontSize = 30;
+    }
     return AppBar(
       leading: Row(
         children: [
@@ -21,10 +31,10 @@ class HomescreenAppBar extends StatelessWidget {
           ),
         ],
       ),
-      title: const Text(
+      title: Text(
         'Pixabay',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: fontSize,
           fontWeight: FontWeight.bold,
         ),
       ),

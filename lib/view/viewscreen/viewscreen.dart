@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:gallery_application/view/viewscreen/widget/view_screen_appbar.dart';
+
+import 'widget/iconbox.dart';
 
 class FullScreenImage extends StatelessWidget {
   final Map<String, dynamic> imageData;
@@ -9,19 +11,63 @@ class FullScreenImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Full Screen Image'),
-      ),
-      body: GestureDetector(
-        onTap: () {
-          Get.back();
-        },
-        child: Center(
-          child: Image.network(
-            imageData['largeImageURL'],
-            fit: BoxFit.contain,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+                child: ViewScreenAppBar(
+                    user: imageData['user'], url: imageData['userImageURL'])),
           ),
-        ),
+          Center(
+            child: Hero(
+              tag: imageData['id'],
+              child: Image.network(
+                imageData['largeImageURL'],
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 20,
+            right: 20,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: 0.8,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildInfoItem(
+                      icon: Icons.remove_red_eye,
+                      label: '${imageData['views']} ',
+                    ),
+                    buildInfoItem(
+                      icon: Icons.file_download,
+                      label: '${imageData['downloads']} ',
+                    ),
+                    buildInfoItem(
+                      icon: Icons.favorite,
+                      label: '${imageData['likes']} ',
+                    ),
+                    buildInfoItem(
+                      icon: Icons.comment,
+                      label: '${imageData['comments']} ',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

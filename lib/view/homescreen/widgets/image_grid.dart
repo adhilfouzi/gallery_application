@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../model/data_provider/pixa_data_provider.dart';
+import '../../../viewmodel/image_view_model.dart';
 import 'image_tile.dart';
 
 class ImageGrid extends StatelessWidget {
@@ -8,8 +8,8 @@ class ImageGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<PixaController>(
-      init: PixaController(),
+    return GetX<ImageViewModel>(
+      init: ImageViewModel(),
       builder: (controller) {
         if (controller.isLoading.value) {
           return const Center(

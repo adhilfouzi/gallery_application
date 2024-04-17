@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'utils/homescreen_appbar.dart';
-import 'utils/image_grid.dart';
+import 'widgets/homescreen_appbar.dart';
+import 'widgets/image_grid.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -34,7 +34,7 @@ class HomescreenAppBar extends StatelessWidget {
           onPressed: () {
             // Handle settings button tap
           },
-          icon: Icon(Icons.settings),
+          icon: const Icon(Icons.settings),
         ),
       ],
       automaticallyImplyLeading: false, // Disable back button

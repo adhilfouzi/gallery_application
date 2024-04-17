@@ -1,4 +1,6 @@
-const openApiKey = 'https://pixabay.com/api/';
-const myid = '37775942-8c9d29341ec492be8cdeb5544';
-const apiToGetPhoto =
-    'https://pixabay.com/api/?key=$myid&q=yellow+flowers&image_type=photo';
+class Protected {
+  static const String apiKey = '37775942-8c9d29341ec492be8cdeb5544';
+  static const String apiBaseUrl = 'https://pixabay.com/api/';
+  // static const apiToGetPhoto =
+  //     'https://pixabay.com/api/?key=$myid&q=yellow+flowers&image_type=photo';
+}

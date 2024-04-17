@@ -1,13 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:gallery_application/model/repository/image_repository.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class PixaController extends GetxController {
-  static const String _apiKey = '37775942-8c9d29341ec492be8cdeb5544';
-  static const String _apiBaseUrl = 'https://pixabay.com/api/';
-
+class ImageViewModel extends GetxController {
   var images = <Map<String, dynamic>>[].obs;
   var isLoading = true.obs;
 
@@ -19,7 +16,7 @@ class PixaController extends GetxController {
 
   void fetchData() async {
     try {
-      var response = await http.get(Uri.parse('$_apiBaseUrl?key=$_apiKey'));
+      var response = await ImageRepository.getData();
       handleResponse(response);
     } catch (e) {
       handleError(e.toString());

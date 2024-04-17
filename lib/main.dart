@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:gallery_application/view/homescreen/utils/homescreen_appbar.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,61 +14,146 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Pixabay Gallery',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: HomescreenAppBar(),
+      ),
+      body: ImageGrid(),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class ImageGrid extends StatelessWidget {
+  const ImageGrid({super.key});
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  Widget build(BuildContext context) {
+    return GetX<PixaController>(
+      init: PixaController(),
+      builder: (controller) {
+        if (controller.isLoading.value) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return GridView.custom(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 1,
+              mainAxisSpacing: 4,
+              childAspectRatio: 3 / 4, // Aspect ratio adjusted to 3:4
+            ),
+            childrenDelegate: SliverChildBuilderDelegate(
+              (context, index) {
+                if (index < controller.images.length) {
+                  return ImageTile(imageData: controller.images[index]);
+                } else {
+                  return Container();
+                }
+              },
+              childCount: controller.images.length, // Set the childCount
+            ),
+          );
+        }
+      },
+    );
   }
+}
+
+class ImageTile extends StatelessWidget {
+  final Map<String, dynamic> imageData;
+
+  const ImageTile({super.key, required this.imageData});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(FullScreenImage(imageData: imageData));
+      },
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: AspectRatio(
+            aspectRatio: 3 / 2,
+            child: Image.network(
+              imageData['webformatURL'],
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FullScreenImage extends StatelessWidget {
+  final Map<String, dynamic> imageData;
+
+  const FullScreenImage({super.key, required this.imageData});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text('Full Screen Image'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: GestureDetector(
+        onTap: () {
+          Get.back();
+        },
+        child: Center(
+          child: Image.network(
+            imageData['largeImageURL'],
+            fit: BoxFit.contain,
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+}
+
+class PixaController extends GetxController {
+  var images = <Map<String, dynamic>>[].obs;
+  var isLoading = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchData();
+  }
+
+  void fetchData() async {
+    try {
+      var response = await http.get(Uri.parse(
+          'https://pixabay.com/api/?key=37775942-8c9d29341ec492be8cdeb5544'));
+      var decodedResponse = jsonDecode(response.body);
+      images.assignAll(List.from(decodedResponse['hits']));
+    } catch (e) {
+      log('Error fetching data: $e');
+    } finally {
+      isLoading(false);
+    }
   }
 }

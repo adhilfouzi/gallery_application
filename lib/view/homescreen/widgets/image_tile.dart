@@ -11,6 +11,17 @@ class ImageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    double fontSize = 10;
+    if (width < 360) {
+      fontSize = 8;
+    } else if (width < 600) {
+      fontSize = 10;
+    } else if (width < 1024) {
+      fontSize = 14;
+    } else {
+      fontSize = 18;
+    }
     return GestureDetector(
       onTap: () {
         Get.to(FullScreenImage(imageData: imageData),
@@ -60,10 +71,10 @@ class ImageTile extends StatelessWidget {
                     SizedBox(width: width * 0.002),
                     Text(
                       '${imageData['likes']}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: fontSize,
                       ),
                     ),
                     SizedBox(width: width * 0.05),
@@ -75,10 +86,10 @@ class ImageTile extends StatelessWidget {
                     SizedBox(width: width * 0.002),
                     Text(
                       '${imageData['views']}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: fontSize,
                       ),
                     ),
                   ],

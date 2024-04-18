@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../model/const/images.dart';
+import '../../../viewmodel/dark.dart';
 import '../../../viewmodel/image_view_model.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -29,15 +30,15 @@ class SearchTextField extends StatelessWidget {
             controller: controller.textEditingController,
             onChanged: onChanged,
             autocorrect: true,
-            cursorColor: Colors.black,
             decoration: InputDecoration(
               hintText: 'Search...',
               prefixIcon: Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: width * 0.02, vertical: height * 0.02),
-                child: SvgPicture.asset(
-                  ImagePath.search,
-                ),
+                child: Obx(() => SvgPicture.asset(ImagePath.search,
+                    color: Get.find<DarkMode>().isDark.value
+                        ? Colors.white
+                        : Colors.black)),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),

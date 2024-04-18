@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gallery_application/model/const/images.dart';
+import 'package:get/get.dart';
+import '../../../viewmodel/dark.dart';
 
 class HomescreenAppBar extends StatelessWidget {
   const HomescreenAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    // final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     double fontSize = 10;
     if (width < 360) {
@@ -20,27 +23,32 @@ class HomescreenAppBar extends StatelessWidget {
       fontSize = 30;
     }
     return AppBar(
-      // leading: Row(
-      //   children: [
-      //     SizedBox(
-      //       width: width * 0.02,
-      //     ),
-      //     SvgPicture.asset(
-      //       ImagePath.logo,
-      //       // width: width * 0.0,
-      //       // height: height * 0.05,
-      //     ),
-      //   ],
-      // ),
       title: Text(
         'Pixabay',
         style: TextStyle(
-          fontSize: fontSize,
           fontWeight: FontWeight.bold,
+          fontSize: fontSize,
         ),
       ),
-      centerTitle: true,
-      actions: const [],
+      actions: [
+        Obx(
+          () {
+            var isDark = Get.put(DarkMode()).isDark.value;
+            return CupertinoButton(
+              child: SvgPicture.asset(
+                isDark ? ImagePath.brightness : ImagePath.moon,
+                color: isDark ? Colors.white : Colors.black,
+              ),
+              onPressed: () {
+                Get.find<DarkMode>().toggleDarkMode();
+              },
+            );
+          },
+        ),
+        SizedBox(
+          width: width * 0.018,
+        ),
+      ],
       automaticallyImplyLeading: false,
     );
   }

@@ -33,7 +33,7 @@ class ImageViewModel extends GetxController {
           : await ImageRepository.getData();
       handleResponse(response);
     } catch (e) {
-      handleError(e.toString());
+      handleError("Please Check the Connectivity");
     }
   }
 

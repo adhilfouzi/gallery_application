@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gallery_application/view/homescreen/homescreen.dart';
-import 'package:gallery_application/viewmodel/image_view_model.dart';
 
 import 'viewmodel/dark.dart';
 // main.dart
@@ -9,10 +8,6 @@ import 'viewmodel/dark.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize the ImageViewModel instance
-  Get.put(ImageViewModel());
-
   // Initialize the DarkMode instance
   Get.put(DarkMode());
 

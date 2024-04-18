@@ -22,12 +22,11 @@ class HomescreenAppBar extends StatelessWidget {
     return AppBar(
       leading: Row(
         children: [
-          const Spacer(),
+          // const Spacer(),
           SvgPicture.asset(
             ImagePath.logo,
             width: width * 0.05,
             height: height * 0.05,
-            // color: Colors.black,
           ),
         ],
       ),
@@ -39,15 +38,8 @@ class HomescreenAppBar extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      actions: [
-        IconButton(
-          onPressed: () {
-            // Handle settings button tap
-          },
-          icon: const Icon(Icons.settings),
-        ),
-      ],
-      automaticallyImplyLeading: false, // Disable back button
+      actions: const [],
+      automaticallyImplyLeading: false,
     );
   }
 }

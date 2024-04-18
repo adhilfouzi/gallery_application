@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../model/const/images.dart';
 import '../../../viewmodel/image_view_model.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -16,6 +18,8 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, height * 0.01),
       child: GetBuilder<ImageViewModel>(
@@ -28,7 +32,13 @@ class SearchTextField extends StatelessWidget {
             cursorColor: Colors.black,
             decoration: InputDecoration(
               hintText: 'Search...',
-              prefixIcon: const Icon(Icons.search),
+              prefixIcon: Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.02, vertical: height * 0.02),
+                child: SvgPicture.asset(
+                  ImagePath.search,
+                ),
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

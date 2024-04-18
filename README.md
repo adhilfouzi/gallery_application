@@ -14,6 +14,8 @@ Welcome to the Flutter Gallery Application repository! This Flutter application 
   
 - **Full-Screen Mode:** Clicking on an image expands it into full-screen mode, offering an immersive viewing experience. Users can easily return to the original gallery view.
 
+## Video Presentation : [Video Presentation](https://youtu.be/PoYKeJpDEd8)
+
 ## Screenshots : [Screenshots](https://drive.google.com/drive/folders/13bwQlvUFLhMRy8xiiV2oZIV6Y625v1DX)
 <div align="center">
   <img src="https://github.com/adhilfouzi/gallery_application/assets/141894607/7d6628d0-f96f-406e-ae1b-8c4e98e723f0" alt="Screenshot 2" width="200" />
@@ -30,10 +32,6 @@ Welcome to the Flutter Gallery Application repository! This Flutter application 
   <img src="https://github.com/adhilfouzi/gallery_application/assets/141894607/9e1f3733-68b1-40d1-9714-35b68f5fd0ad" alt="Screenshot 7" width="200" />
   <img src="https://github.com/adhilfouzi/gallery_application/assets/141894607/1f05bd3f-c8b0-4ca4-8a7f-19aa1500b844" alt="Screenshot 4" width="200" />
 </div>
-
-
-
-## Video Presentation : [Video Presentation](https://youtu.be/PoYKeJpDEd8)
 
 ## Getting Started
 

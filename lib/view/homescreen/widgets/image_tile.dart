@@ -25,7 +25,7 @@ class ImageTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(FullScreenImage(imageData: imageData),
-            duration: const Duration(milliseconds: 10));
+            transition: Transition.leftToRightWithFade);
       },
       child: Card(
         elevation: 2,

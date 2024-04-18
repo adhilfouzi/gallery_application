@@ -20,13 +20,13 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: width * 0.02, vertical: height * 0.01),
+            horizontal: width * 0.02, vertical: height * 0.02),
         child: Column(
           children: [
             SearchTextField(
               controller: searchController,
               onChanged: (query) {
-                Get.find<ImageViewModel>().fetchData(searchData: query);
+                Get.find<ImageViewModel>().fetchData();
               },
             ),
             Expanded(

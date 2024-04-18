@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gallery_application/viewmodel/image_view_model.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'image_tile.dart';
 
 class ImageGrid extends StatelessWidget {
@@ -21,6 +22,7 @@ class ImageGrid extends StatelessWidget {
     } else {
       crossAxisCount = 4;
     }
+
     return Column(
       children: [
         Expanded(
@@ -35,17 +37,22 @@ class ImageGrid extends StatelessWidget {
                 List<Map<String, dynamic>> filteredImages =
                     controller.filteredImages;
                 if (filteredImages.isNotEmpty) {
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: 1,
-                      mainAxisSpacing: 4,
-                      childAspectRatio: 3 / 4,
+                  return LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    color: Colors.lightBlueAccent,
+                    onRefresh: () => Get.find<ImageViewModel>().fetchData(),
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 1,
+                        mainAxisSpacing: 4,
+                        childAspectRatio: 3 / 4,
+                      ),
+                      itemCount: filteredImages.length,
+                      itemBuilder: (context, index) {
+                        return ImageTile(imageData: filteredImages[index]);
+                      },
                     ),
-                    itemCount: filteredImages.length,
-                    itemBuilder: (context, index) {
-                      return ImageTile(imageData: filteredImages[index]);
-                    },
                   );
                 } else {
                   return Center(

@@ -25,11 +25,11 @@ class ImageViewModel extends GetxController {
     fetchData();
   }
 
-  void fetchData({String? searchData}) async {
+  Future<void> fetchData() async {
     try {
       isLoading(true);
-      final response = searchData != null
-          ? await ImageRepository.searchData(searchData)
+      final response = textEditingController.isBlank != null
+          ? await ImageRepository.searchData(textEditingController.text)
           : await ImageRepository.getData();
       handleResponse(response);
     } catch (e) {

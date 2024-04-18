@@ -11,25 +11,27 @@ class HomescreenAppBar extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     double fontSize = 10;
     if (width < 360) {
-      fontSize = 10;
+      fontSize = 15;
     } else if (width < 600) {
-      fontSize = 20;
+      fontSize = 22;
     } else if (width < 1024) {
       fontSize = 25;
     } else {
       fontSize = 30;
     }
     return AppBar(
-      leading: Row(
-        children: [
-          // const Spacer(),
-          SvgPicture.asset(
-            ImagePath.logo,
-            width: width * 0.05,
-            height: height * 0.05,
-          ),
-        ],
-      ),
+      // leading: Row(
+      //   children: [
+      //     SizedBox(
+      //       width: width * 0.02,
+      //     ),
+      //     SvgPicture.asset(
+      //       ImagePath.logo,
+      //       // width: width * 0.0,
+      //       // height: height * 0.05,
+      //     ),
+      //   ],
+      // ),
       title: Text(
         'Pixabay',
         style: TextStyle(

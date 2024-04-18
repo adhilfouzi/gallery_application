@@ -13,14 +13,6 @@ class FullScreenImage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: SafeArea(
-                child: ViewScreenAppBar(
-                    user: imageData['user'], url: imageData['userImageURL'])),
-          ),
           Center(
             child: Hero(
               tag: imageData['id'],
@@ -29,6 +21,14 @@ class FullScreenImage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+                child: ViewScreenAppBar(
+                    user: imageData['user'], url: imageData['userImageURL'])),
           ),
           Positioned(
             bottom: 20,
@@ -44,7 +44,7 @@ class FullScreenImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     buildInfoItem(
                       icon: Icons.remove_red_eye,

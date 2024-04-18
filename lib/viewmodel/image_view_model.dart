@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:gallery_application/model/repository/image_repository.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +11,13 @@ class ImageViewModel extends GetxController {
   var filteredImages = <Map<String, dynamic>>[].obs;
   var isLoading = true.obs;
   var errorMessage = ''.obs;
+  final TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void onClose() {
+    textEditingController.dispose();
+    super.onClose();
+  }
 
   @override
   void onInit() {

@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: width * 0.02, vertical: height * 0.02),
+            horizontal: width * 0.02, vertical: height * 0.01),
         child: Column(
           children: [
             SearchTextField(

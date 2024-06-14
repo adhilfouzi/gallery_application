@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController searchController = TextEditingController();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -24,13 +23,12 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             SearchTextField(
-              controller: searchController,
               onChanged: (query) {
                 Get.find<ImageViewModel>().fetchData();
               },
             ),
-            Expanded(
-              child: ImageGrid(searchController: searchController),
+            const Expanded(
+              child: ImageGrid(),
             ),
           ],
         ),

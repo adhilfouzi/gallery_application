@@ -5,9 +5,7 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'image_tile.dart';
 
 class ImageGrid extends StatelessWidget {
-  final TextEditingController searchController;
-
-  const ImageGrid({super.key, required this.searchController});
+  const ImageGrid({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,12 +7,10 @@ import '../../../viewmodel/dark.dart';
 import '../../../viewmodel/image_view_model.dart';
 
 class SearchTextField extends StatelessWidget {
-  final TextEditingController controller;
   final void Function(String)? onChanged;
 
   const SearchTextField({
     super.key,
-    required this.controller,
     this.onChanged,
   });
 

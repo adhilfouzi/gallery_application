@@ -1,6 +1,7 @@
-import 'package:gallery_application/model/secret/secret_key.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+
+import '../secret/secret_key.dart';
 
 class ImageRepository {
   static Future<Response> getData() async {

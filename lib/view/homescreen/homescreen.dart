@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_application/view/homescreen/widgets/search_view.dart';
-import 'package:gallery_application/viewmodel/image_view_model.dart';
+
 import 'package:get/get.dart';
+import '../../viewmodel/image_view_model.dart';
 import 'widgets/homescreen_appbar.dart';
 import 'widgets/image_grid.dart';
+import 'widgets/search_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

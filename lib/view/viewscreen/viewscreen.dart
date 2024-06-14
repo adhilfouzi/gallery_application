@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_application/view/viewscreen/widget/view_screen_appbar.dart';
 
 import 'widget/iconbox.dart';
+import 'widget/view_screen_appbar.dart';
 
 class FullScreenImage extends StatelessWidget {
   final Map<String, dynamic> imageData;

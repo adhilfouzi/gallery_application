@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:gallery_application/model/repository/image_repository.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../model/repository/image_repository.dart';
 
 class ImageViewModel extends GetxController {
   var allImages = <Map<String, dynamic>>[].obs;

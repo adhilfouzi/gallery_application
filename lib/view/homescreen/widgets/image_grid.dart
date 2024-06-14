@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gallery_application/viewmodel/image_view_model.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import '../../../viewmodel/image_view_model.dart';
 import 'image_tile.dart';
 
 class ImageGrid extends StatelessWidget {

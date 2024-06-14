@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gallery_application/model/const/images.dart';
 import 'package:get/get.dart';
+import '../../../model/const/images.dart';
 import '../../../viewmodel/dark.dart';
 
 class HomescreenAppBar extends StatelessWidget {

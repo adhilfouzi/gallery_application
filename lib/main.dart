@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gallery_application/view/homescreen/homescreen.dart';
 
+import 'view/homescreen/homescreen.dart';
 import 'viewmodel/dark.dart';
 
 void main() {

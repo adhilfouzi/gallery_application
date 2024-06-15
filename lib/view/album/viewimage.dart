@@ -1,12 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../model/db_model/album_model.dart';
 import 'db_functions.dart';
 
 class ViewScreen extends StatelessWidget {
-  final imageview;
-  const ViewScreen({super.key, required this.imageview});
+  final AlbumModel imageView;
+  final AlbumController albumController = Get.find();
+
+  ViewScreen({super.key, required this.imageView});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,17 @@ class ViewScreen extends StatelessWidget {
         title: const Text('View Image'),
         actions: [
           IconButton(
-              onPressed: () {
-                deleteData(imageview.id);
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.delete))
+            onPressed: () {
+              albumController.deleteData(imageView.id!);
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.delete),
+          )
         ],
       ),
       body: GestureDetector(
-          child: Center(child: Image.file(File(imageview.imagex)))),
+        child: Center(child: Image.file(File(imageView.imagex))),
+      ),
     );
   }
 }

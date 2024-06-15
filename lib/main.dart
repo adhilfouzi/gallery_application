@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'view/album/db_functions.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'model/db_model/album_model.dart';
 import 'view/head/bottom_bar.dart';
 import 'viewmodel/dark.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDatabase();
+  await Hive.initFlutter();
+  Hive.registerAdapter(AlbumModelAdapter());
+  await Hive.openBox<AlbumModel>('albums');
   Get.put(DarkMode());
-
   runApp(const MyApp());
 }
 
